@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const BooksController = require('../controller/BooksController');
+const {BookValidator}= require('../Validators')
 
 
-router.post('/books', BooksController.create);
+router.post('/books', BookValidator.create, BooksController.create);
 //Get all
 router.get('/books', BooksController.find);
 //Read one
