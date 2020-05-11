@@ -3,8 +3,8 @@ module.exports = {
     create: (body) => books.create(body),
     find: () => books.find(),
     findbyId: (id) => books.findById(id),
-    update: (user, body) => {
-        Object.assign(user, body);
-        return user.save()
+    update: (book, body) => {
+        Object.assign(book, body);
+        return book.save()
     },
 }
