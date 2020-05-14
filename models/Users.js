@@ -6,7 +6,7 @@ const SALT_WORK_FACTOR = 10;
 const userSchema = new Schema({
     first_name: {
         type:String,
-        required:true
+        required: true
     },
     last_name: {
         type: String,
@@ -46,12 +46,12 @@ userSchema.pre('save', function(next){
     })
 })
 
-/* UserSchema.methods.comparePassword = function(candidatePassword) {
+userSchema.methods.comparePassword = function(candidatePassword) {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
         if (err) return false;
         return isMatch;
     });
   };
- */
+
 const Users =mongoose.model('User',userSchema);
 module.exports = Users
