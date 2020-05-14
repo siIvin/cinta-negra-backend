@@ -21,9 +21,7 @@ const studentSchema = new Schema({
     readBooks:[
         
         {
-        comment:{
-            type: {type: String}
-        }, 
+        comment:{type: String}, 
         book: {type: Schema.ObjectId, ref: books}
         }
      ],
