@@ -12,10 +12,19 @@ const studentSchema = new Schema({
         required: true
     },
     dateOfBirth:{
-        type: String,
+        type: Date,
         required: true
     },
-    readBooks:[{type: Schema.ObjectId, ref: books}],
+    profile_img:{
+        type: String,
+    },
+    readBooks:[
+        
+        {
+        comment:{type: String}, 
+        book: {type: Schema.ObjectId, ref: books}
+        }
+     ],
     is_active:{
         type: Boolean,
         default: true

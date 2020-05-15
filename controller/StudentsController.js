@@ -1,7 +1,15 @@
 const { StudentsService } = require('../services')
+const { uploadFile } = require('../utils')
 
 module.exports = {
-    create: (req, res) => {
+    create: async(req, res) => {
+        if (req.files) {
+            const { photo } = req.files;
+            console.log(req);
+            const upload = await uploadFile(photo.tempFilePath);
+            if (upload) req.body.profile_img = upload.url;
+
+        }
         StudentsService.create(req.body)
             .then(student => res.status(201).send(student))
             .catch(err => res.status(400).send({ message: 'error creating student', err }));
@@ -9,7 +17,7 @@ module.exports = {
     find: (req, res) => {
         StudentsService.find()
             .then(students => res.status(200).send(students))
-            .catch(err => res.status(404).send({ message: 'error getting students',err }))
+            .catch(err => res.status(404).send({ message: 'error getting students', err }))
     },
     findbyId: async (req, res) => {
         const { id } = req.params;
@@ -20,7 +28,14 @@ module.exports = {
             res.status(401).send({ message: 'Not found', error })
         }
     },
-    findbyIdandUpdate: (req, res) => {
+    findbyIdandUpdate: async (req, res) => {
+        if (req.files) {
+            const { photo } = req.files;
+            console.log(req);
+            const upload = await uploadFile(photo.tempFilePath);
+            if (upload) req.body.profile_img = upload.url;
+
+        }
         const { id } = req.params;
         const { body } = req
         StudentsService.findbyId(id)
@@ -37,4 +52,5 @@ module.exports = {
         } catch (error) {
             res.status(404).send({ message: 'Error deleting student', error })
         }
-    }}
+    }
+}
